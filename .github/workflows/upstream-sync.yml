@@ -22,7 +22,7 @@ jobs:
 
       - name: Merge main-apache branch
         run: |
-          git checkout main-apache
+          git checkout --track origin/main-apache
           git merge upstream/main
 
       - name: Push changes
