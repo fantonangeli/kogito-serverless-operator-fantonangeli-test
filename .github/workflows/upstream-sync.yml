@@ -17,8 +17,8 @@ jobs:
       - name: Set upstream remote
         run: git remote add upstream https://github.com/fantonangeli/incubator-kie-kogito-serverless-operator-fantonangeli-test.git
 
-      - name: Fetch upstream changes
-        run: git fetch upstream
+      - name: Fetch all
+        run: git fetch --all
 
       - name: Merge main-apache branch
         run: |
