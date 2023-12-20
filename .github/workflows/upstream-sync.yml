@@ -5,7 +5,8 @@ env:
 
 on:
   schedule:
-    - cron: "0 0 * * *" # every day at midnight
+    #- cron: "0 0 * * *" # every day at midnight
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -19,7 +20,8 @@ jobs:
 
       - name: Setup git environment
         run: |
-          git config user.name "$USERNAME"
+          git config --global user.name "$USERNAME"
+          git config --global user.email "$USERNAME@users.noreply.github.com"
           git remote add upstream https://github.com/fantonangeli/incubator-kie-kogito-serverless-operator-fantonangeli-test.git
 
       - name: Fetch all
