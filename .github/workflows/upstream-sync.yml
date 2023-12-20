@@ -1,7 +1,8 @@
 name: Sync main-apache branch with upstream/main
 
 env:
-  USERNAME: ${{ github.actor }}
+  USERNAME: github-actions[bot]
+  USEREMAIL: github-actions[bot]@users.noreply.github.com
 
 on:
   schedule:
@@ -21,7 +22,7 @@ jobs:
       - name: Setup git environment
         run: |
           git config --global user.name "$USERNAME"
-          git config --global user.email "$USERNAME@users.noreply.github.com"
+          git config --global user.email "$USEREMAIL"
           git remote add upstream https://github.com/fantonangeli/incubator-kie-kogito-serverless-operator-fantonangeli-test.git
 
       - name: Fetch all
