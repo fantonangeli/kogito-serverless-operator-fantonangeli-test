@@ -1,0 +1,30 @@
+name: Sync main-apache branch with upstream/main
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # every day at midnight
+  workflow_dispatch:
+
+jobs:
+  sync-main-apache:
+    name: Sync main-apache branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set upstream remote
+        run: git remote add upstream https://github.com/fantonangeli/incubator-kie-kogito-serverless-operator-fantonangeli-test.git
+
+      - name: Fetch upstream changes
+        run: git fetch upstream
+
+      - name: Merge main-apache branch
+        run: |
+          git checkout main-apache
+          git merge upstream/main
+
+      - name: Push changes
+        run: git push origin main-apache
+
