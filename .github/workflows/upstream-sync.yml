@@ -1,5 +1,8 @@
 name: Sync main-apache branch with upstream/main
 
+env:
+  USERNAME: ${{ github.actor }}
+
 on:
   schedule:
     - cron: "0 0 * * *" # every day at midnight
@@ -14,16 +17,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set upstream remote
-        run: git remote add upstream https://github.com/fantonangeli/incubator-kie-kogito-serverless-operator-fantonangeli-test.git
+      - name: Setup git environment
+        run: |
+          git config user.name "$USERNAME"
+          git remote add upstream https://github.com/fantonangeli/incubator-kie-kogito-serverless-operator-fantonangeli-test.git
 
       - name: Fetch all
         run: git fetch --all
 
-      - name: Merge main-apache branch
-        run: |
-          git checkout --track origin/main-apache
-          git merge --no-edit upstream/main
+      - name: Checkout main-apache branch
+        run: git checkout --track origin/main-apache
+
+      - name: Merge upstream/main branch
+        run: git merge --no-edit upstream/main
 
       - name: Push changes
         run: git push origin main-apache
